@@ -27,11 +27,10 @@ const Deck = () => {
     }));
   
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="min-h-screen flex justify-center bg-gray-100 p-4">
         <div className="flex gap-4">
           {groupedCards.map((group) => (
             <div key={group.suit} className="flex flex-col items-center">
-              <h2 className="text-2xl font-bold mb-4 text-center">{group.suit}</h2>
               <div className="relative w-[100px] h-[150px] overflow-visible">
                 {group.cards.map((card, index) => (
                   <Card
@@ -42,14 +41,14 @@ const Deck = () => {
                     isActive={activeCard === card.id}
                     classNames={`absolute transition-all duration-500 ease-in-out transform 
                       ${activeCard === card.id 
-                        ? 'z-50 scale-105 translate-y-0' 
-                        : `translate-y-[${index * 2}px]`} 
-                      ${activeCard !== null && activeCard !== card.id 
-                        ? 'opacity-50' 
-                        : 'opacity-100'}`}
+                        ? 'translate-x-[50px]' 
+                        : `translate-y-[${index * 1}px]`} 
+                      `}
                     style={{
-                      zIndex: activeCard === card.id ? 50 : group.cards.length - index,
-                      transform: `translateY(${index * 2}px) ${activeCard === card.id ? 'scale(1.05)' : ''}`
+                      position: 'absolute',
+                      zIndex: index+1,
+                      top: `${index * 30}px`,
+                      transform: `translateY(${index * 1}px) ${activeCard === card.id ? 'translateX(50px)' : ''}`
                     }}
                   />
                 ))}
